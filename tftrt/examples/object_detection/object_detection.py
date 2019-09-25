@@ -338,7 +338,8 @@ def optimize_model(frozen_graph,
                    num_calib_images=None,
                    calib_batch_size=1,
                    calib_image_shape=None,
-                   output_path=None):
+                   output_path=None,
+                   tb_dir=None):
     """Optimizes an object detection model using TensorRT
 
     Optimizes an object detection model using TensorRT.  This method also
@@ -461,6 +462,7 @@ def optimize_model(frozen_graph,
     if output_path is not None:
         with open(output_path, 'wb') as f:
             f.write(frozen_graph.SerializeToString())
+    if tb_dir:
         tf.summary.FileWriter(output_path, frozen_graph)
 
     return frozen_graph
