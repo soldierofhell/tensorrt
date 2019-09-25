@@ -455,12 +455,13 @@ def optimize_model(frozen_graph,
                 num_runs=num_batches,
                 feed_dict_fn=feed_dict_fn)
             calibration_time = time.time() - start_time
-            print("time(s) (trt_calibration): %.4f" % calibration_time)
+            print("time(s) (trt_calibration): %.4f" % calibration_time)            
 
     # write optimized model to disk
     if output_path is not None:
         with open(output_path, 'wb') as f:
             f.write(frozen_graph.SerializeToString())
+        tf.summary.FileWriter(output_path, frozen_graph)
 
     return frozen_graph
 
