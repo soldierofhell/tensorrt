@@ -463,7 +463,7 @@ def optimize_model(frozen_graph,
         with open(output_path, 'wb') as f:
             f.write(frozen_graph.SerializeToString())
     if tb_dir:
-        tf.summary.FileWriter(output_path, frozen_graph)
+        tf.summary.FileWriter(os.path.join(tb_dir, 'tensorboard_graph'), frozen_graph)
 
     return frozen_graph
 
